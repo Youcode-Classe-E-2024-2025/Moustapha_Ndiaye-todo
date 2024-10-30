@@ -1,0 +1,16 @@
+{
+  "name": "moustapha_ndiaye-todo",
+  "version": "1.0.0",
+  "description": "https://www.figma.com/design/khS5jZCwIew25USUIQy85S/Untitled?node-id=0-1&node-type=canvas&t=aUWtKkZwS5fx6RFZ-0 # Trello https://trello.com/b/rasSnhy8/syst%C3%A8me-de-gestion-des-t%C3%A2ches-to-do-list",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tailwindcss -i ./src/style/styles.css -o ./dist/output.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.14"
+  }
+}
