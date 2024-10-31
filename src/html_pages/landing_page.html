@@ -76,21 +76,39 @@
             <div class="button-category absolute top-[5%] left-[90%]">
                 <a href="#">
                     <button class="start-button p-5 bg-secondary-color rounded-l-[10px] text-black font-bold font-roboto
-                    transition-transform transform hover:scale-105 hover:text-blue-500 whitespace-nowrap">+ Add category</button>
+                    transition-transform transform hover:scale-105 hover:text-blue-500 whitespace-nowrap">+ Add
+                        category</button>
                 </a>
             </div>
         </section>
-        <section>
-            <div class="ToDo-card bg-white shadow-md rounded-lg p-4 m-4 max-w-xs">
-                <h2 class="text-lg font-semibold mb-2">Titre de la Tâche</h2>
-                <p class="text-gray-700 mb-4">Description de la tâche ici. Ajoute plus de détails sur ce qui doit être fait.</p>
-                <div class="flex justify-between items-center">
-                    <span class="text-sm text-gray-500">Date limite: 30/10/2024</span>
-                    <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition">
-                        Marquer comme fait
-                    </button>
+        <section class="flex justify-center space-x-[10%] mt-[3%] p-0">
+            <!-- ToDo Card -->
+            <div class="ToDo p-4 w-[351px] h-[600px] bg-secondary-color rounded-xl">
+                <div class="card-container flex space-x-[85%]">
+                    <h3 class="font-bold whitespace-nowrap">ToDo</h3>
+                    <button class="start-button font-roboto
+                    transition-transform transform hover:scale-105 hover:bg-white">+</button>
                 </div>
-            </div>            
+                <hr>
+            </div>
+            <!-- InProgress Card -->
+            <div class="InProgress p-4 w-[351px] h-[600px] bg-secondary-color rounded-xl">
+                <div class="card-container flex space-x-[70%]">
+                    <h3 class="font-bold whitespace-nowrap">In Progress</h3>
+                    <button class="start-button font-roboto
+                    transition-transform transform hover:scale-105 hover:bg-white">+</button>
+                </div>
+                <hr>
+            </div>
+            <!-- Done Card -->
+            <div class="Done p-4 w-[351px] h-[600px] bg-secondary-color rounded-xl">
+                <div class="card-container flex space-x-[85%]">
+                    <h3 class="font-bold whitespace-nowrap">Done</h3>
+                    <button class="start-button font-roboto
+                    transition-transform transform hover:scale-105 hover:bg-white">+</button>
+                </div>
+                <hr>
+            </div>
         </section>
     </main>
 </body>
