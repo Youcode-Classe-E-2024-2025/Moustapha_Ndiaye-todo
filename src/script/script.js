@@ -147,4 +147,3 @@ function toggleStatistics() {
     const statisticsSection = document.getElementById("task-statistics");
     statisticsSection.classList.toggle("hidden");
 }
-
