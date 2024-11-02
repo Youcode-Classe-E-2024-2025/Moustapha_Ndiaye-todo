@@ -10,17 +10,10 @@ function renderTasks() {
     doneList.innerHTML = '';
 
     tasks.forEach((task, index) => {
-        const taskElement = document.createElement("li");
-        taskElement.className = `p-2 border rounded ${getPriorityClass(task.priority)}`;
-        taskElement.innerHTML = `
-            <strong>${task.title}</strong><br>
-            Due: ${task.dueDate} | Priority: ${task.priority}<br>
-            <button onclick="changeTaskStatus(${index})" title="Change Status"><i class="fas fa-sync-alt"></i></button>
-            <button onclick="editTask(${index})" title="Edit"><i class="fas fa-edit"></i></button>
-            <button onclick="viewTask(${index})" title="View"><i class="fas fa-eye"></i></button>
-            <button onclick="deleteTask(${index})" title="Delete"><i class="fas fa-trash-alt"></i></button>
-        `;
-        
+        const taskElement = createTaskElement(task, index);
+        taskElement.setAttribute("draggable", "true");
+        taskElement.addEventListener("dragstart", (event) => dragStart(event, index));
+
         if (task.status === "To Do") {
             todoList.appendChild(taskElement);
         } else if (task.status === "In Progress") {
@@ -33,16 +26,22 @@ function renderTasks() {
     updateStatistics();
 }
 
+function createTaskElement(task, index) {
+    const taskElement = document.createElement("li");
+    taskElement.className = `p-2 border rounded ${getPriorityClass(task.priority)}`;
+    taskElement.innerHTML = `
+        <strong>${task.title}</strong><br>
+        Due: ${task.dueDate} | Priority: ${task.priority}<br>
+        <button onclick="editTask(${index})" title="Edit"><i class="fas fa-edit"></i></button>
+        <button onclick="viewTask(${index})" title="View"><i class="fas fa-eye"></i></button>
+        <button onclick="deleteTask(${index})" title="Delete"><i class="fas fa-trash-alt"></i></button>
+    `;
+    return taskElement;
+}
+
 function addTask(title, description, dueDate, status, priority) {
     const newTask = { title, description, dueDate, status, priority };
     tasks.push(newTask);
-    renderTasks();
-}
-
-function changeTaskStatus(index) {
-    const currentStatus = tasks[index].status;
-    const nextStatus = currentStatus === "To Do" ? "In Progress" : (currentStatus === "In Progress" ? "Done" : "To Do");
-    tasks[index].status = nextStatus;
     renderTasks();
 }
 
@@ -147,3 +146,27 @@ function toggleStatistics() {
     const statisticsSection = document.getElementById("task-statistics");
     statisticsSection.classList.toggle("hidden");
 }
+
+function dragStart(event, index) {
+    event.dataTransfer.setData("taskIndex", index);
+}
+
+function allowDrop(event) {
+    event.preventDefault();
+}
+
+function drop(event, status) {
+    event.preventDefault();
+    const taskIndex = event.dataTransfer.getData("taskIndex");
+    tasks[taskIndex].status = status;
+    renderTasks();
+}
+
+document.getElementById("todo-list").addEventListener("dragover", allowDrop);
+document.getElementById("todo-list").addEventListener("drop", (event) => drop(event, "To Do"));
+
+document.getElementById("in-progress-list").addEventListener("dragover", allowDrop);
+document.getElementById("in-progress-list").addEventListener("drop", (event) => drop(event, "In Progress"));
+
+document.getElementById("done-list").addEventListener("dragover", allowDrop);
+document.getElementById("done-list").addEventListener("drop", (event) => drop(event, "Done"));
