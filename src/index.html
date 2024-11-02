@@ -4,35 +4,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../dist/output.css">
+    <link rel="stylesheet" href="../../../dist/output.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <title>ToDoList</title>
 </head>
 
 <body class="bg-main-color">
-    <main>
-        <section>
-            <div class="img-container relative">
-                <div class="img-cover flex justify-center items-center mt-16">
-                    <img src="../images/home-img.jpg"
-                        alt="Board image" title="image of my home page" class="img rounded-lg h-[650px] w-[950px] object-cover">
-                </div>
-                <div class="overlay-text absolute top-[45%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-                    <h3 class="whitespace-nowrap text-lg sm:text-xl md:text-2xl lg:text-3xl font-roboto font-bold">Manage your task, manage your life</h3>
-                    <p class="whitespace-nowrap text-base sm:text-lg md:text-xl lg:text-2xl mt-2 font-DancingScript">"Take control, stay focused, and achieve more every day."</p>
-                </div>
-                
-                <div class="button-container absolute top-[52%] left-1/2">
-                    <a href="../src/html_pages/landing_page.html">
-                        <button class="start-button p-3 bg-main-color rounded-lg text-white font-roboto
-                        transition-transform transform hover:scale-105 hover:bg-[#036a7a]">Start</button>
-                    </a>
+    <main class="px-4 md:px-0">
+        <!-- Navigations -->
+        <nav class="bg-white rounded-2xl p-3 shadow-md mt-5 md:mt-10 mx-auto max-w-screen-md">
+            <ul class="flex flex-wrap justify-between items-center">
+                <li class="flex-1">
+                    <input type="text" placeholder="Search"
+                        class="w-full max-w-[600px] p-2 border rounded focus:outline-none ">
+                </li>
+                <li>
+                    <div class="relative inline-block">
+                        <svg aria-label="Show tasks" xmlns="http://www.w3.org/2000/svg" width="24" height="20"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-eye w-6 h-6 hover:text-blue-500 transition transform hover:scale-110 cursor-pointer"
+                            onclick="toggleSelect()">
+                            <path d="M1 12s3-9 11-9 11 9 11 9-3 9-11 9-11-9-11-9z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <!-- </svg>
+                        <select id="task-select" class="pl-8 hidden absolute bg-white border border-gray-300 rounded-md mt-1">
+                            <option value="default">View Default</option>
+                            <option value="date">View by Date</option>
+                            <option value="priority">View by Priority</option>
+                        </select> -->
+                    </div>
+                </li>
+                <li>
+                    <div class="h-6 w-px bg-gray-300 mx-4 hidden md:block"></div>
+                </li>
+                <li>
+                    <svg aria-label="View Statistics" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="feather feather-bar-chart w-6 h-6 hover:text-blue-500 transition transform hover:scale-110">
+                        <rect x="3" y="10" width="1" height="10"></rect>
+                        <rect x="10" y="5" width="1" height="15"></rect>
+                        <rect x="17" y="2" width="1" height="18"></rect>
+                    </svg>
+                </li>
+            </ul>
+        </nav>
 
+        <!-- Task Sections -->
+        <section
+            class="flex flex-col md:flex-row justify-center md:space-x-4 space-y-4 md:space-y-0 mt-6 mx-auto max-w-screen-xl">
+            <!-- ToDo Card -->
+            <div class="w-full md:w-[30%] h-auto bg-secondary-color rounded-xl p-4">
+                <div class="flex justify-between items-center mb-2">
+                    <h3 class="font-bold text-lg">ToDo</h3>
+                    <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-700 transition"
+                        onclick="AddCard()">+</button>
                 </div>
+                <hr>
             </div>
 
+            <!-- In Progress Card -->
+            <div class="w-full md:w-[30%] h-auto bg-secondary-color rounded-xl p-4">
+                <div class="flex justify-between items-center mb-2">
+                    <h3 class="font-bold text-lg">In Progress</h3>
+                    <button class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition"
+                        onclick="AddCard()">+</button>
+                </div>
+                <hr>
+            </div>
+
+            <!-- Done Card -->
+            <div class="w-full md:w-[30%] h-auto bg-secondary-color rounded-xl p-4">
+                <div class="flex justify-between items-center mb-2">
+                    <h3 class="font-bold text-lg">Done</h3>
+                    <button class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-700 transition"
+                        onclick="AddCard()">+</button>
+                </div>
+                <hr>
+            </div>
+        </section>
+        <!-- Add Task -->
+        <section id="add-card" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
+            <div class="bg-white w-full max-w-md rounded-lg shadow-lg p-6 relative  ">
+                <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-600" onclick="AddCard()">×</button>
+                <h2 class="text-lg font-semibold mb-4">Add Task</h2>
+                <input type="text" placeholder="Task title"
+                    class="w-full mb-4 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <textarea placeholder="Description"
+                    class="w-full mb-4 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    rows="4"></textarea>
+                <input type="date"
+                    class="w-full mb-4 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select class="w-full mb-4 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="Todo">Todo</option>
+                    <option value="In progress">In progress</option>
+                    <option value="Done">Done</option>
+                </select>
+                <select class="w-full mb-4 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="high" class="text-red-500">High</option>
+                    <option value="medium" class="text-yellow-500">Medieum</option>
+                    <option value="low" class="text-green-500">Low</option>
+                </select>
+                <button
+                    class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-700 transition">Save</button>
+            </div>
         </section>
     </main>
+    <script src="../src/script/script.js">
+
+    </script>
 </body>
 
 </html>
