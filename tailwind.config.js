@@ -1,14 +1,17 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/script/*.{js}','./*.html'],
+  content: [
+    "./.html",
+    "./assets/js/**/.js",
+  ],
   theme: {
     extend: {
-      colors : {
-        'main-color' : '#048B9A' ,
-        'secondary-color' : '#D9D9D9'
+      colors: {
+        'main-color': '#048B9A',
+        'secondary-color': '#D9D9D9'
       },
-      fontFamily : {
-        'DancingScript' : ['cursive'],
+      fontFamily: {
+        'DancingScript': ['cursive'],
       },
     },
   },
