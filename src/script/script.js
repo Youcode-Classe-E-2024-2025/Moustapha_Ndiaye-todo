@@ -53,7 +53,7 @@ function deleteTask(index) {
 
 function getPriorityClass(priority) {
     switch (priority) {
-        case 'Hight':
+        case 'High':
             return 'bg-red-200';
         case 'Medium':
             return 'bg-orange-200';
@@ -138,7 +138,7 @@ document.getElementById("save-task").addEventListener("click", () => {
     document.getElementById("task-description").value = '';
     document.getElementById("task-date").value = '';
     document.getElementById("task-status").value = 'To Do'; 
-    document.getElementById("task-priority").value = 'P3'; 
+    document.getElementById("task-priority").value = 'Low'; 
 
     hideAddCard();
 });

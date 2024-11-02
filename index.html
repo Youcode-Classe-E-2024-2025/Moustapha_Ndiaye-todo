@@ -19,7 +19,6 @@
             </p>
         </div>
 
-
         <!-- Statistics Section -->
         <section id="task-statistics" class="mt-5 p-4 bg-white rounded-xl shadow-md">
             <h3 class="font-bold text-lg">Statistiques</h3>
@@ -28,7 +27,6 @@
             <p id="in-progress-count" class="mt-1">In Progress: 0</p>
             <p id="done-count" class="mt-1">Done: 0</p>
         </section>
-
 
         <div class="flex flex-wrap justify-between mt-5">
             <button aria-label="View Statistics" onclick="toggleStatistics()" class="bg-white ml-1 rounded-xl">
@@ -40,6 +38,7 @@
                     <rect x="17" y="2" width="1" height="18"></rect>
                 </svg>
             </button>
+
             <!-- ToDo Card -->
             <section class="w-full md:w-[30%] h-auto bg-white rounded-xl p-4 shadow-md">
                 <header class="flex justify-between items-center mb-2">
@@ -105,7 +104,7 @@
                 <label for="task-priority" class="text-lg font-semibold mb-4">Priority</label>
                 <select id="task-priority"
                     class="w-full mb-4 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                    <option value="Hight">Hight</option>
+                    <option value="High">High</option>
                     <option value="Medium">Medium</option>
                     <option value="Low">Low</option>
                 </select>
@@ -115,13 +114,12 @@
                 </button>
             </div>
         </section>
+
         <div id="task-details"
             class="hidden bg-white w-full max-w-md rounded-lg shadow-lg p-6 relative mt-4 flex flex-col items-center mx-auto sm:max-w-lg md:max-w-xl lg:max-w-2xl">
-
         </div>
-
-
     </main>
+
     <script src="../src/script/script.js"></script>
 </body>
 
