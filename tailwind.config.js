@@ -8,7 +8,6 @@ module.exports = {
         'secondary-color' : '#D9D9D9'
       },
       fontFamily : {
-        'robot' : ['Roboto', 'sans serif'],
         'DancingScript' : ['cursive'],
       },
     },

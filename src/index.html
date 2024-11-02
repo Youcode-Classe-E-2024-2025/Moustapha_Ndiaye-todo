@@ -6,114 +6,123 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../dist/output.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <title>ToDoList</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>ToDo List</title>
 </head>
 
 <body class="bg-main-color">
     <main class="px-4 md:px-0">
-        <!-- Navigations -->
-        <nav class="bg-white rounded-2xl p-3 shadow-md mt-5 md:mt-10 mx-auto max-w-screen-md">
-            <ul class="flex flex-wrap justify-between items-center">
-                <li class="flex-1">
-                    <input type="text" placeholder="Search"
-                        class="w-full max-w-[600px] p-2 border rounded focus:outline-none ">
-                </li>
-                <li>
-                    <div class="relative inline-block">
-                        <svg aria-label="Show tasks" xmlns="http://www.w3.org/2000/svg" width="24" height="20"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round"
-                            class="feather feather-eye w-6 h-6 hover:text-blue-500 transition transform hover:scale-110 cursor-pointer"
-                            onclick="toggleSelect()">
-                            <path d="M1 12s3-9 11-9 11 9 11 9-3 9-11 9-11-9-11-9z"></path>
-                            <circle cx="12" cy="12" r="3"></circle>
-                            <!-- </svg>
-                        <select id="task-select" class="pl-8 hidden absolute bg-white border border-gray-300 rounded-md mt-1">
-                            <option value="default">View Default</option>
-                            <option value="date">View by Date</option>
-                            <option value="priority">View by Priority</option>
-                        </select> -->
-                    </div>
-                </li>
-                <li>
-                    <div class="h-6 w-px bg-gray-300 mx-4 hidden md:block"></div>
-                </li>
-                <li>
-                    <svg aria-label="View Statistics" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="feather feather-bar-chart w-6 h-6 hover:text-blue-500 transition transform hover:scale-110">
-                        <rect x="3" y="10" width="1" height="10"></rect>
-                        <rect x="10" y="5" width="1" height="15"></rect>
-                        <rect x="17" y="2" width="1" height="18"></rect>
-                    </svg>
-                </li>
-            </ul>
-        </nav>
+        <!-- Navigation -->
+        <div class="bg-white rounded-2xl p-5 shadow-md mt-5 md:mt-10 mx-auto max-w-screen-md">
+            <p class="font-bold font-DancingScript sm:text-xl md:text-2xl lg:text-2xl flex justify-center whitespace-nowrap">
+                "Take control, stay focused, and achieve more every day"
+            </p>
+        </div>
 
-        <!-- Task Sections -->
-        <section
-            class="flex flex-col md:flex-row justify-center md:space-x-4 space-y-4 md:space-y-0 mt-6 mx-auto max-w-screen-xl">
+
+        <!-- Statistics Section -->
+        <section id="task-statistics" class="mt-5 p-4 bg-white rounded-xl shadow-md">
+            <h3 class="font-bold text-lg">Statistiques</h3>
+            <p id="total-tasks" class="mt-2">Total Tasks: 0</p>
+            <p id="todo-count" class="mt-1">To Do: 0</p>
+            <p id="in-progress-count" class="mt-1">In Progress: 0</p>
+            <p id="done-count" class="mt-1">Done: 0</p>
+        </section>
+
+
+        <div class="flex flex-wrap justify-between mt-5">
+            <button aria-label="View Statistics" onclick="toggleStatistics()" class="bg-white ml-1 rounded-xl">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-bar-chart w-6 h-6 hover:text-blue-500 transition transform hover:scale-110">
+                    <rect x="3" y="10" width="1" height="10"></rect>
+                    <rect x="10" y="5" width="1" height="15"></rect>
+                    <rect x="17" y="2" width="1" height="18"></rect>
+                </svg>
+            </button>
             <!-- ToDo Card -->
-            <div class="w-full md:w-[30%] h-auto bg-secondary-color rounded-xl p-4">
-                <div class="flex justify-between items-center mb-2">
+            <section class="w-full md:w-[30%] h-auto bg-white rounded-xl p-4 shadow-md">
+                <header class="flex justify-between items-center mb-2">
                     <h3 class="font-bold text-lg">ToDo</h3>
                     <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-700 transition"
-                        onclick="AddCard()">+</button>
-                </div>
+                        onclick="showAddCard()">+</button>
+                </header>
                 <hr>
-            </div>
+                <ul id="todo-list" class="space-y-2"></ul>
+            </section>
 
             <!-- In Progress Card -->
-            <div class="w-full md:w-[30%] h-auto bg-secondary-color rounded-xl p-4">
-                <div class="flex justify-between items-center mb-2">
+            <section class="w-full md:w-[30%] h-auto bg-white rounded-xl p-4 shadow-md mt-4 md:mt-0">
+                <header class="flex justify-between items-center mb-2">
                     <h3 class="font-bold text-lg">In Progress</h3>
                     <button class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition"
-                        onclick="AddCard()">+</button>
-                </div>
+                        onclick="showAddCard()">+</button>
+                </header>
                 <hr>
-            </div>
+                <ul id="in-progress-list" class="space-y-2"></ul>
+            </section>
 
             <!-- Done Card -->
-            <div class="w-full md:w-[30%] h-auto bg-secondary-color rounded-xl p-4">
-                <div class="flex justify-between items-center mb-2">
+            <section class="w-full md:w-[30%] h-auto bg-white rounded-xl p-4 shadow-md mt-4 md:mt-0">
+                <header class="flex justify-between items-center mb-2">
                     <h3 class="font-bold text-lg">Done</h3>
                     <button class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-700 transition"
-                        onclick="AddCard()">+</button>
-                </div>
+                        onclick="showAddCard()">+</button>
+                </header>
                 <hr>
-            </div>
-        </section>
+                <ul id="done-list" class="space-y-2"></ul>
+            </section>
+        </div>
+
         <!-- Add Task -->
         <section id="add-card" class="fixed hidden inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
-            <div class="bg-white w-full max-w-md rounded-lg shadow-lg p-6 relative  ">
-                <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-600" onclick="AddCard()">×</button>
+            <div class="bg-white w-full max-w-md rounded-lg shadow-lg p-6 relative">
+                <button class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+                    onclick="hideAddCard()">×</button>
                 <h2 class="text-lg font-semibold mb-4">Add Task</h2>
-                <input type="text" placeholder="Task title"
-                    class="w-full mb-4 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <textarea placeholder="Description"
-                    class="w-full mb-4 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    rows="4"></textarea>
-                <input type="date"
-                    class="w-full mb-4 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <select class="w-full mb-4 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="Todo">Todo</option>
-                    <option value="In progress">In progress</option>
+
+                <label for="task-title" class="sr-only">Task Title</label>
+                <input type="text" id="task-title" placeholder="Task title"
+                    class="w-full mb-4 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+
+                <label for="task-description" class="sr-only">Description</label>
+                <textarea id="task-description" placeholder="Description"
+                    class="w-full mb-4 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" rows="4"
+                    maxlength="100" required></textarea>
+
+                <label for="task-date" class="sr-only">Due Date</label>
+                <input type="date" id="task-date"
+                    class="w-full mb-4 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+
+                <label for="task-status" class="text-lg font-semibold mb-4">Status</label>
+                <select id="task-status"
+                    class="w-full mb-4 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <option value="To Do">To Do</option>
+                    <option value="In Progress">In Progress</option>
                     <option value="Done">Done</option>
                 </select>
-                <select class="w-full mb-4 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="high" class="text-red-500">High</option>
-                    <option value="medium" class="text-yellow-500">Medieum</option>
-                    <option value="low" class="text-green-500">Low</option>
+
+                <label for="task-priority" class="text-lg font-semibold mb-4">Priority</label>
+                <select id="task-priority"
+                    class="w-full mb-4 p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <option value="Hight">Hight</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
                 </select>
-                <button
-                    class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-700 transition">Save</button>
+
+                <button id="save-task" class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-700 transition">
+                    Save
+                </button>
             </div>
         </section>
-    </main>
-    <script src="../src/script/script.js">
+        <div id="task-details"
+            class="hidden bg-white w-full max-w-md rounded-lg shadow-lg p-6 relative mt-4 flex flex-col items-center mx-auto sm:max-w-lg md:max-w-xl lg:max-w-2xl">
 
-    </script>
+        </div>
+
+
+    </main>
+    <script src="../src/script/script.js"></script>
 </body>
 
 </html>
